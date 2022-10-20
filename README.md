@@ -11,7 +11,7 @@ LogseqTestGraph.zip contains a fully generated Test Graph built using _builtlogs
 # Usage
 `python3 builtlogseqtestgraph.py`
 
-# Before you run builtlogseqtestgraph.py
+# Before you run buildlogseqtestgraph.py
 At a minimum you will need to change the _targetfolder_ address in _builtlogseqtestgraph.py_ so that the builder knows where to build the generated graph
 
 
