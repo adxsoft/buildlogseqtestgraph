@@ -4,12 +4,16 @@ Builds a test logseq graph with generated data and query testing capabilities in
  - advanced query examples 
  - embedded iframe which uses the online advanced query builder tool https://adxsoft.github.io/logseqadvancedquerybuilder
    - see _https://github.com/adxsoft/logseqadvancedquerybuilder_
+   
+# Generated Graph
+LogseqTestGraph.zip contains a fully generated Test Graph built using _builtlogseqtestgraph.py_
+
+# Usage
+`python3 builtlogseqtestgraph.py`
 
 # Before you run builtlogseqtestgraph.py
 At a minimum you will need to change the _targetfolder_ address in _builtlogseqtestgraph.py_ so that the builder knows where to build the generated graph
 
-# Usage
-`python3 builtlogseqtestgraph.py`
 
 # Advanced Customisation
 Assuming you are comfortable with python, modify the generator settings in _builtlogseqtestgraph.py_ as follows
