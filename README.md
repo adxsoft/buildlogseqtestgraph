@@ -17,16 +17,21 @@ At a minimum you will need to change the _targetfolder_ address in _builtlogseqt
 
 # Advanced Customisation
 Assuming you are comfortable with python, modify the generator settings in _builtlogseqtestgraph.py_ as follows
+
 - **targetfolder** - the folder location where the graph is to be built 
+
 - in **PageGroupsToGenerate** array add the following entry and change the values (not the keys) to your page generation requirements
-`{
+
+  - `{
         'title': 'Test Pages',
         'pageprefix': 'testpage',
         'nopages': 20,
         'namespace': '',
     },`
+
 - in **JournalsToGenerate** array change the one and only entry to your date range, number of journals to build and the maximum gap in days that can occur
-`{
+
+  - `{
     'fromdate': '2020_01_01',
     'todate': '2023_12_31',
     'nojournals': 50,
