@@ -26,10 +26,10 @@ Assuming you are comfortable with python, modify the generator settings in _buil
         'namespace': '',
     },`
 - in **JournalsToGenerate** array change the one and only entry to your date range, number of journals to build and the maximum gap in days that can occur
-{
+`{
     'fromdate': '2020_01_01',
     'todate': '2023_12_31',
     'nojournals': 50,
     'maxincrementindays': 45,
-}
+}`
  
