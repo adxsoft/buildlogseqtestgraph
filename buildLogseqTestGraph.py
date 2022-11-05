@@ -1,4 +1,8 @@
 # %%
+
+##############################################################################
+# NOTE. Tested on Mac OS only. Should work on Linux and Windows
+##############################################################################
 import random
 import shutil
 from time import strftime
@@ -50,9 +54,9 @@ PageGroupsToGenerate = [
 ]
 
 JournalsToGenerate = {
-    'fromdate': '2020_01_01',
+    'fromdate': '2022_01_01',
     'todate': '2023_12_31',
-    'nojournals': 50,
+    'nojournals': 20,
     'maxincrementindays': 45,
 }
 
@@ -308,23 +312,38 @@ def createPage(pagename):
     return page
 
 
-def createQueryPage(pagename, queryname):
+def createQueryPage(pagename, entry):
     global homepage
+    fields = entry.split("#+BEGIN")
+    if len(fields) != 2:
+        return
+    commandlines = fields[0]
+    querylines = "#+BEGIN"+fields[1]
+    title = entry.split('\n')[0].replace('title: ', '')
     # page property with a unique id
     page = "page-id:: "+str(uuid. uuid1())+'\n'
     # page properties
     page += PageProperty('pagetype', 'query')
     page += '[[Home]]\n'
-    homepage += 'Query [['+pagename+']] - '+queryname+'\n'
+    homepage += 'Query [['+pagename+']] - '+title+'\n'
     commands = []
+
+    # find the test case data for this page in the test cases
     for entry in td.QueryTestCases:
-        if entry['name'] == queryname:
+        fields = entry.split("#+BEGIN")
+        if len(fields) != 2:
+            return
+        testcasecommandlines = fields[0]
+        testcasequerylines = "#+BEGIN"+fields[1]
+        testcasetitle = entry.split('\n')[0].replace('title: ', '')
+
+        if testcasetitle == title:
             commands.append('- Query Commands\n    - ```\n' +
-                            '\n'.join(entry['commands'])+'\n```\n')
+                            commandlines+'\n```\n')
             commands.append('- Generated Query\n    - ```clojure\n' +
-                            '\n'+entry['query']+'\n```\n')
+                            '\n'+querylines+'\n```\n')
             commands.append('- Query Results\n' +
-                            '\n'+'    - '+entry['query']+'\n```\n')
+                            '\n'+'    - '+querylines+'\n\n')
 
     page += '\n'.join(commands)
     return page
@@ -339,7 +358,7 @@ def addPages(targetfolder, nopages=20, namespace='', pageprefix='testpage',):
     else:
         ns = namespace
     homepage += '\n- ### Pages Generated for prefix='+pageprefix+' and ' + \
-                ' namespace='+ns+'\n\n'
+        ' namespace='+ns+'\n\n'
     if not os.path.exists(pagesfolder):
         os.mkdir(pagesfolder)
     namespaceinternal = namespace
@@ -407,7 +426,7 @@ def addQueryPages(targetfolder, namespace='Queries/', pageprefix='queryexample',
         pagesuffix = pagesuffix[-3:]
         pagename = namespaceexternal+pageprefix+pagesuffix
         pages.append(
-            {"pagename": pagename, "content": createQueryPage(pagename, entry['name'])})
+            {"pagename": pagename, "content": createQueryPage(pagename, entry)})
 
 
 def LogseqDate(inputdate):
@@ -537,7 +556,7 @@ def addRandomPageLinksToTasks(marker):
                 pageref = pages[otherpageindex]["pagename"]
                 pageref = pageref.replace('%2F', "/")
                 journal["content"] = journal["content"].replace(
-                    marker, marker+' [['+pageref+']]')
+                    '\n- '+marker, '\n- '+marker+' [['+pageref+']]')
     for page in pages:
         randno = random.randint(0, 9)
         if randno < 5:
@@ -545,7 +564,7 @@ def addRandomPageLinksToTasks(marker):
                 pageref = pages[otherpageindex]["pagename"]
                 pageref = pageref.replace('%2F', "/")
                 page["content"] = page["content"].replace(
-                    marker, marker+' [['+pageref+']]')
+                    '\n- '+marker, '\n- '+marker+' [['+pageref+']]')
     return
 
 
@@ -659,7 +678,7 @@ def createLogseqGraph():
         f.write(QueryTestingPage())
         f.close()
 
-    print('logseq Graph created in folder '+targetfolder)
+    print('logseq Graph created in folder ~/LogseqTestGraph'+targetfolder)
     # print(GraphStatistics())
     if AddQueryPages:
         print('\nNote. The generated graph includes pages with advanced query examples')
