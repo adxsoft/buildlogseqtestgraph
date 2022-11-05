@@ -1,3 +1,5 @@
+**Updated 5th Nov 2022 see Releases section below**
+
 # buildlogseqtestgraph
 Builds a test logseq graph with generated data and query testing capabilities including
  - random pages and blocks, journals, tasks, page tags, block tags, page properties, block properties and links
@@ -10,6 +12,7 @@ LogseqTestGraph.zip contains a fully generated Test Graph built using _builtlogs
 
 # Usage
 `python3 builtlogseqtestgraph.py`
+
 
 # Before you run buildlogseqtestgraph.py
 At a minimum you will need to change the _targetfolder_ address in _builtlogseqtestgraph.py_ so that the builder knows where to build the generated graph
@@ -38,3 +41,8 @@ Assuming you are comfortable with python, modify the generator settings in _buil
     'maxincrementindays': 45,
 }`
  
+# Releases
+_Version 0.1_
+- original release
+_Version 0.2_
+- bug fixes and compatibility with _https://github.com/adxsoft/logseqadvancedquerybuilder_ v0.2
