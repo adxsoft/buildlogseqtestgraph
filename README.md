@@ -46,3 +46,4 @@ _Version 0.1_
 - original release
 _Version 0.2_
 - bug fixes and compatibility with _https://github.com/adxsoft/logseqadvancedquerybuilder_ v0.2
+- added more page properties adn additional query examples using and and or with command arguments
