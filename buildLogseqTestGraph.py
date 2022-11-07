@@ -81,7 +81,8 @@ contentspage = '- Generated Logseq Graph\n\n' + \
 
 # random content
 pagepropertynames = ['group', 'rating']
-pagepropertyvalues = ['p-major', 'p-minor', 'p-basic', 'p-advanced']
+pagepropertyvalues = ['p-major', 'p-minor', 'p-basic', 'p-advanced',
+                      'p-type1', 'p-type2', 'p-type3', 'p-type4']
 pagetagvalues = ['classA', 'classB', 'classC', 'classD',
                  'classE', 'classF', 'classG', 'classH', ]
 blockpropertynamevalues = ['category', 'designation', 'grade']
@@ -303,6 +304,7 @@ def createPage(pagename):
     page = "page-id:: "+str(uuid. uuid1())+'\n'
     # page properties
     page += PageProperty('pagetype', randomPagePropertyValue())
+    page += PageProperty('pagecategory', randomPagePropertyValue())
     # page tags
     page += randomPageTags()
     page += '\n- ### Home Page\n - [[Home]]\n\n- ### Page Contents\n\n'
